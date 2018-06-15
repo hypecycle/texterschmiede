@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+
+<div class="w3-center w3-padding">
+  <h2 class="w3-center">Gruppe {{grNummer}}</h2>
+  <p class="w3-large">Alexa steht jetzt am Empfang und hält sich für die neue Empfangskraft. Schreib auf, was sie auf die Frage 'Wer bist du?' Antworten könnte.</p>
+
+</div>
+
+<div class="w3-padding">
+
+
+</div>
+<br>
+</div>
+</div>
+
+
+<div class="w3-padding">
+
+  <form  action="" method="post" role="form">
+
+    {{ form.csrf }}
+
+    <label for="name"><small>Utterance:</small></label>
+    {{ form.speech_inhalt(class_='w3-input', id="name", placeholder='Bitte Alexas Text eingeben') }}<br>
+
+    <label for="description"><small>Gruppenmitglieder:</small></label><br>
+    {{ form.name(class_='w3-input', id="name", placeholder='Hier die Namen mit Komma eingeben') }}<br>
+
+    <br>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+
+    {% for message in messages %}
+        {% if "Error" not in message[1]: %}
+            <div class="w3-container w3-dark-gray">
+                <i class="fa fa-exclamation-triangle"></i> {{ message[1] }}
+            </div>
+        {% endif %}
+
+        {% if "Error" in message[1]: %}
+            <div class="alert alert-warning">
+            {{ message[1] }}
+            </div>
+        {% endif %}
+    {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+
+
+    <div class="w3-center w3-padding">
+        <input id="speichern" name="speichern" type="submit" value="Speichern" class="w3-btn w3-xlarge w3-dark-grey w3-hover-light-grey w3-center" style="font-weight:900;">
+    </div>
+
+{% endblock %}
